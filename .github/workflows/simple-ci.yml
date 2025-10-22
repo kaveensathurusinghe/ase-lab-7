@@ -1,4 +1,4 @@
-name: CI - Test Driven Development
+name: Simple CI
 
 on:
   push:
@@ -30,14 +30,11 @@ jobs:
     - name: Run tests
       run: mvn clean test
       
-    - name: Generate test report
-      uses: dorny/test-reporter@v1.9.1
-      if: success() || failure()
-      with:
-        name: Maven Tests
-        path: target/surefire-reports/*.xml
-        reporter: java-junit
-        fail-on-error: true
+    - name: Display test results
+      if: always()
+      run: |
+        echo "Test results:"
+        find target/surefire-reports -name "*.txt" -exec cat {} \; || echo "No test reports found"
         
     - name: Upload test results
       uses: actions/upload-artifact@v4
