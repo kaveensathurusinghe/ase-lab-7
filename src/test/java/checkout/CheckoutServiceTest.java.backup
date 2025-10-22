@@ -1,0 +1,49 @@
+package checkout;
+
+import cart.Cart;
+import payment.PaymentGateway;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+class CheckoutServiceTest {
+    private Cart cart;
+    private PaymentGateway paymentGateway;
+    private CheckoutService checkoutService;
+
+    @BeforeEach
+    void setUp() {
+        cart = mock(Cart.class);
+        paymentGateway = mock(PaymentGateway.class);
+        checkoutService = new CheckoutService(paymentGateway);
+    }
+
+    @Test
+    void testCheckoutSuccess() {
+        // Arrange
+        when(cart.getTotal()).thenReturn(100.0);
+        when(paymentGateway.charge(100.0, "token_123")).thenReturn(true);
+        
+        // Act
+        boolean result = checkoutService.processCheckout(cart, "token_123");
+        
+        // Assert
+        assertTrue(result);
+        verify(paymentGateway).charge(100.0, "token_123");
+    }
+
+    @Test
+    void testCheckoutFailsWhenPaymentFails() {
+        // Arrange
+        when(cart.getTotal()).thenReturn(100.0);
+        when(paymentGateway.charge(100.0, "token_123")).thenReturn(false);
+        
+        // Act
+        boolean result = checkoutService.processCheckout(cart, "token_123");
+        
+        // Assert
+        assertFalse(result);
+        verify(paymentGateway).charge(100.0, "token_123");
+    }
+}
