@@ -13,10 +13,10 @@
 This report documents the complete Test Driven Development (TDD) process for building an e-commerce platform following the Red → Green → Refactor methodology. All six requirements (A-F) were successfully implemented with comprehensive test coverage.
 
 **Final Results:**
-- ✅ **27 tests passing, 0 failures, 0 errors**
-- ✅ **6 requirements completed** (Product/Catalog, Cart, Inventory, Discounts, Checkout, Orders)
-- ✅ **Clean architecture** with separation of concerns
-- ✅ **CI/CD pipeline** with GitHub Actions
+-  **27 tests passing, 0 failures, 0 errors**
+-  **6 requirements completed** (Product/Catalog, Cart, Inventory, Discounts, Checkout, Orders)
+-  **Clean architecture** with separation of concerns
+-  **CI/CD pipeline** with GitHub Actions
 
 ---
 
@@ -27,7 +27,7 @@ This report documents the complete Test Driven Development (TDD) process for bui
 - Catalog can add products and return a product by sku
 - Searching for a missing SKU returns null
 
-### 🔴 RED — Failing Test
+###  RED — Failing Test
 
 **Test Code:**
 ```java
@@ -59,7 +59,7 @@ void testCreateProductWithValidData() {
 [ERROR] - Tests failed to compile because Product class doesn't exist
 ```
 
-### 🟢 GREEN — Minimal Implementation
+###  GREEN — Minimal Implementation
 
 **Implementation Code:**
 ```java
@@ -136,7 +136,7 @@ public class Catalog {
 - Quantity must be an integer > 0
 - Total sums (price * quantity) across items
 
-### 🔴 RED — Failing Test
+###  RED — Failing Test
 
 **Test Code:**
 ```java
@@ -168,7 +168,7 @@ void testAddSameItemTwiceIncreasesQuantity() {
 [ERROR] - Tests failed to compile because SimpleCart class doesn't exist
 ```
 
-### 🟢 GREEN — Minimal Implementation
+###  GREEN — Minimal Implementation
 
 **Implementation Code:**
 ```java
@@ -258,7 +258,7 @@ public class SimpleLineItem {
 - Write tests that simulate low inventory using mocks/stubs
 - If inventory insufficient, the add operation should fail with a clear error
 
-### 🔴 RED — Failing Test
+###  RED — Failing Test
 
 **Test Code:**
 ```java
@@ -295,7 +295,7 @@ void testAddItemToExistingCartItemChecksCurrentQuantity() {
 [ERROR] - Tests failed to compile because InventoryCart class doesn't exist
 ```
 
-### 🟢 GREEN — Minimal Implementation
+###  GREEN — Minimal Implementation
 
 **Implementation Code:**
 ```java
@@ -379,7 +379,7 @@ public class InventoryCart {
 - Bulk discount: If quantity >= 10 for a single SKU, apply 10% off that line
 - Order discount: If cart total >= 1000, apply a 5% discount to the order subtotal
 
-### 🔴 RED — Failing Test
+###  RED — Failing Test
 
 **Test Code:**
 ```java
@@ -425,7 +425,7 @@ void testTotalDiscountCalculationWithBothDiscounts() {
 [ERROR]   location: variable discountEngine of type discount.DiscountEngine
 ```
 
-### 🟢 GREEN — Minimal Implementation
+###  GREEN — Minimal Implementation
 
 **Implementation Code:**
 ```java
